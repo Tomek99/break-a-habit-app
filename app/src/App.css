@@ -45,12 +45,10 @@ select {
   grid-template-rows: auto 1fr auto;
 }
 
-body {
-  /* margin: 0;
+.page-wrapper {
   display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh; */
+  flex-direction: column;
+  align-items: center;
 }
 
 /* button {

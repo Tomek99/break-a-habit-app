@@ -15,16 +15,18 @@ function App() {
   return (
     <>
       <NavigationBar />
-      <Routes>
-        <Route path="/" element={<HabbitsPage />} />
-        <Route path="/habbit" element={<HabbitPage />} />
-        <Route path="/archived-habbits" element={<ArchivedHabbitsPage />} />
-        <Route path="/profile" element={<ProfilePage />} />
-        <Route path="/about" element={<SettingsPage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/sign-up" element={<RegisterPage />} />
-        <Route path="/*" element={<NotFoundPage />} />
-      </Routes>
+      <div className="page-wrapper">
+        <Routes>
+          <Route path="/" element={<HabbitsPage />} />
+          <Route path="/habbit" element={<HabbitPage />} />
+          <Route path="/archived-habbits" element={<ArchivedHabbitsPage />} />
+          <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/about" element={<SettingsPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/sign-up" element={<RegisterPage />} />
+          <Route path="/*" element={<NotFoundPage />} />
+        </Routes>
+      </div>
       <Footer />
     </>
   );

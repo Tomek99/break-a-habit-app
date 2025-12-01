@@ -1,3 +1,13 @@
 .NavigationBar {
   background-color: #1e1e1e;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  div {
+    max-width: 1200px;
+    width: 100%;
+    background-color: red;
+  }
 }

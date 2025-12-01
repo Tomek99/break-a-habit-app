@@ -1,7 +1,15 @@
 import styles from "./NavigationBar.module.scss";
 
 function NavigationBar() {
-  return <div className={styles.NavigationBar}>NavigationBar</div>;
+  return (
+    <header className={styles.NavigationBar}>
+      <nav>
+        <ul>
+          <li></li>
+        </ul>
+      </nav>
+    </header>
+  );
 }
 
 export default NavigationBar;
