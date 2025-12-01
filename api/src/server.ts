@@ -1,8 +1,10 @@
+import dotenv from 'dotenv';
+dotenv.config();
 import app from './app';
 import config from './config/config';
 
 app.get('/', (req, res) => {
-  res.send('nie!');
+  res.send('working!');
 });
 
 app.listen(config.port, () => {

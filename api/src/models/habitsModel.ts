@@ -3,10 +3,10 @@ export interface Habit {
   userId: number;
   habitName: string;
   description: string;
-  streak: number;
-  failure: number;
-  createdAt: Date;
+  count_streak: number;
+  count_failure: number;
   updatedAt: Date;
+  createdAt: Date;
 }
 
 export let habitsModel: Habit[] = [];
