@@ -1,8 +1,9 @@
 import { Router } from 'express';
-import { getUsers } from '../controllers/userController';
+import { deleteUser, updatePassword } from '../controllers/userController';
 
 const router = Router();
 
-router.route('/get-users').get(getUsers);
+router.route('/delete-user/:id').delete(deleteUser);
+router.route('/update-password').put(updatePassword);
 
 export default router;
