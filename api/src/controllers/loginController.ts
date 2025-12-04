@@ -2,6 +2,7 @@ import asyncHandler from 'express-async-handler';
 import type { Request, Response } from 'express';
 import { User } from '../models/userModel';
 import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
 
 type UserType = {
   id: string;

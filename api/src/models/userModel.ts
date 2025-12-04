@@ -5,7 +5,7 @@ export interface IUser extends Document {
   last_name: string;
   email: string;
   passwordHash: string;
-  tokenVersion: number;
+
   createdAt: Date;
   updatedAt: Date;
 }
@@ -32,10 +32,6 @@ const userSchema = new Schema<IUser>(
     passwordHash: {
       type: String,
       required: true,
-    },
-    tokenVersion: {
-      type: Number,
-      default: 0,
     },
   },
   {
