@@ -2,6 +2,7 @@ import express from 'express';
 import registrationRoutes from './routes/registrationRoutes';
 import loginRoutes from './routes/loginRoutes';
 import userRoutes from './routes/userRoutes';
+import habitRoutes from './routes/habitRoutes';
 import { errorHandler } from './middlewares/errorHandler';
 import { connectDB } from './config/db';
 
@@ -13,6 +14,7 @@ app.use(express.json());
 app.use('/api/registration', registrationRoutes);
 app.use('/api/login-user', loginRoutes);
 app.use('/api/users', userRoutes);
+app.use('/api/habits', habitRoutes);
 
 // Global error handler (should be after routes)
 app.use(errorHandler);

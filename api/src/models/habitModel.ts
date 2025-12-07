@@ -1,64 +1,42 @@
-import mongoose, { Schema, Document } from 'mongoose';
+import mongoose, {
+  Schema,
+  InferSchemaType,
+  HydratedDocument,
+  Model,
+} from 'mongoose';
 
-export interface IHabit extends Document {
-  userID: string;
-  habitName: string;
-  description: string;
-  count_streak: number;
-  count_failure: number;
-  isArchived: boolean;
-  lastResetDate: Date;
-  lastResetHistory: LastResetHistory[];
-}
+const lastResetHistorySchema = new Schema({
+  count_streak: { type: Number, required: true },
+  startDate: { type: Date, required: true },
+  endDate: { type: Date, required: true },
+});
 
-export interface LastResetHistory {
-  count_streak: number;
-  startDate: Date;
-  endDate: Date;
-}
-
-const habitsSchema = new Schema<IHabit>(
+const habitSchema = new Schema(
   {
-    userID: {
-      type: String,
-      required: true,
-      trim: true,
-    },
-    habitName: {
-      type: String,
-      required: true,
-    },
-    description: {
-      type: String,
-      required: true,
-    },
-    count_streak: {
-      type: Number,
-      required: true,
-    },
-    count_failure: {
-      type: Number,
-      default: 0,
-      required: true,
-    },
-    isArchived: {
-      type: Boolean,
-      default: false,
-      required: true,
-    },
-    lastResetDate: {
-      type: Date,
-      required: true,
-    },
+    userID: { type: String, required: true, trim: true },
 
-    // lastResetHistory: {
-    //   type: LastResetHistory[],
-    //   required: true
-    // }
+    habitName: { type: String, required: true },
+
+    description: { type: String, required: true },
+
+    count_failure: { type: Number, default: 0, required: true },
+
+    isArchived: { type: Boolean, default: false, required: true },
+
+    lastResetDate: { type: Date, default: new Date() },
+
+    lastResetHistory: {
+      type: [lastResetHistorySchema],
+      default: [],
+    },
   },
   {
-    timestamps: true, // automatyczne createdAt i updatedAt
+    timestamps: true,
   },
 );
 
-export const Habit = mongoose.model<IHabit>('Habit', habitsSchema);
+export type HabitType = InferSchemaType<typeof habitSchema>;
+export type HabitDocument = HydratedDocument<HabitType>;
+export type HabitModel = Model<HabitType>;
+
+export const Habit = mongoose.model<HabitType>('Habit', habitSchema);

@@ -11,11 +11,16 @@ type HabitObj = {
 
 export const getAllHabits = asyncHandler(
   async (req: Request, res: Response) => {
-    const { userID } = req.body;
+    const { id } = req.params;
 
-    const habits = await Habit.find({ userID });
+    if (!id) {
+      res.status(400).json({ message: 'userID is required.' });
+      return;
+    }
+
+    const habits = await Habit.find({ userID: id });
     if (!habits.length) {
-      res.status(400).json({ message: 'There are no habits yet.' });
+      res.status(400).json({ message: 'No habits yet.' });
       return;
     }
 
@@ -38,15 +43,50 @@ export const createHabit = asyncHandler(async (req: Request, res: Response) => {
   };
 
   const createHabit = await Habit.create(habitObj);
-  res.status(200).json({ message: 'Founded habits.', createHabit });
+  res.status(200).json({ message: 'Habit was added.', createHabit });
 });
 
 /// ---------------------------------------------- do zrobienia
 export const resetHabitStreak = asyncHandler(
   async (req: Request, res: Response) => {
-    const { id } = req.body;
-    const resetHabit = await Habit.findByIdAndUpdate(id, {
-      // count_failure: count
+    const { id, lastResetDate } = req.body;
+
+    console.log('hello');
+
+    const endDate = new Date();
+    const resetHabit = await Habit.findByIdAndUpdate(
+      id,
+      {
+        $inc: { count_failure: 1 },
+        lastResetDate: endDate,
+        $push: {
+          lastResetHistory: {
+            count_streak: calculateDays(lastResetDate, endDate),
+            startDate: lastResetDate,
+            endDate,
+          },
+        },
+      },
+      { new: true },
+    );
+
+    console.log('hello2');
+    res.status(200).json({
+      success: true,
+      data: resetHabit,
     });
   },
 );
+
+export function calculateDays(
+  startDate: Date | string,
+  endDate: Date | string,
+): number {
+  const start = new Date(startDate);
+  const end = new Date(endDate);
+
+  const timeDifference = end.getTime() - start.getTime();
+  const daysDifference = timeDifference / (1000 * 60 * 60 * 24);
+
+  return Math.round(daysDifference);
+}

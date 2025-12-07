@@ -28,5 +28,23 @@ export const loginUser = asyncHandler(async (req: Request, res: Response) => {
     email: user.email,
   };
 
-  res.status(200).json({ message: 'You logged in', userData });
+  const token = jwt.sign(
+    { userId: user._id.toString() },
+    process.env.JWT_SECRET!,
+    { expiresIn: '7d' },
+  );
+
+  // 3. Zapisujemy token w httpOnly cookie
+  res.cookie('token', token, {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: 'lax',
+    maxAge: 7 * 24 * 60 * 60 * 1000, // 7 dni
+  });
+
+  // 4. Zwracamy tylko info (bez tokena)
+  res.status(200).json({
+    message: 'Logged in',
+    user: userData,
+  });
 });

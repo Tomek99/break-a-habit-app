@@ -4,8 +4,8 @@ import { Habit } from '../models/habitModel';
 
 export const getAllArchivedHabits = asyncHandler(
   async (req: Request, res: Response) => {
-    const { userID } = req.body;
-    const archivedHabits = await Habit.find({ userID });
+    const { id } = req.body;
+    const archivedHabits = await Habit.find({ id, isArchived: true });
 
     if (!archivedHabits) {
       res.status(400).json({ messeage: 'Empty' });
@@ -13,6 +13,26 @@ export const getAllArchivedHabits = asyncHandler(
     }
 
     res.status(200).json({ message: 'Something was found', archivedHabits });
+  },
+);
+
+export const archiveHabit = asyncHandler(
+  async (req: Request, res: Response) => {
+    const { id } = req.body;
+    const archivedHabit = await Habit.findByIdAndUpdate(
+      id,
+      {
+        isArchived: true,
+      },
+      { new: true },
+    );
+
+    if (!archivedHabit) {
+      res.status(400).json({ messeage: "Habit doesn't exist" });
+      return;
+    }
+
+    res.status(200).json({ message: 'Item has been archived', archivedHabit });
   },
 );
 
