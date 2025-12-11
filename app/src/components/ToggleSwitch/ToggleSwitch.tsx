@@ -2,7 +2,7 @@
 import { useContext } from "react";
 import styles from "./ToggleSwitch.module.scss";
 import Switch from "@mui/material/Switch";
-import { DarkModeContext } from "../../context/DarkModeContext";
+import { DarkModeContext } from "../../context/DarkModeContext/DarkModeContext";
 const label = { inputProps: { "aria-label": "Switch demo" } };
 
 function ToggleSwitch() {

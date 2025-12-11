@@ -1,7 +1,7 @@
 import styles from "./NavigationBar.module.scss";
 import linkData from "../../data/navBarLinks.json";
 import NavBarLink from "../../components/NavBarLink/NavBarLink";
-import { DarkModeContext } from "../../context/DarkModeContext";
+import { DarkModeContext } from "../../context/DarkModeContext/DarkModeContext";
 import { useContext } from "react";
 function NavigationBar() {
   // #F8F9FB
