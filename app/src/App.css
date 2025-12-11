@@ -25,13 +25,14 @@ select {
   outline: none;
   border: none;
   text-decoration: none;
-  font-family: "Roboto", sans-serif;
+
   /* transition: 0.2s linear; */
 }
 
 :root {
+  background-color: #fff;
+  color: #000;
   color-scheme: light dark;
-  background-color: #242424;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -51,6 +52,14 @@ select {
   align-items: center;
 }
 
+html {
+  font-size: 62.5%;
+  overflow-x: hidden;
+  scroll-padding-top: 9rem;
+  scroll-behavior: smooth;
+  font-family: "Inter", sans-serif;
+}
+
 /* button {
   border-radius: 8px;
   border: 1px solid transparent;
@@ -62,3 +71,43 @@ select {
   cursor: pointer;
   transition: border-color 0.25s;
 } */
+
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Links: remove default underline and inherit color */
+a {
+  color: inherit;
+  text-decoration: none;
+  background: transparent;
+  -webkit-tap-highlight-color: transparent; /* mobile */
+}
+
+/* Keep keyboard accessibility — style focus instead of removing it */
+a:focus,
+button:focus {
+  outline: 2px solid transparent; /* fallback */
+  outline-offset: 2px;
+}
+
+/* Provide a visible focus style (replace --accent with your color) */
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--accent, #0077ff);
+  outline-offset: 3px;
+}
+
+.ThemeDark {
+  background-color: #242424;
+  color: #fff;
+}

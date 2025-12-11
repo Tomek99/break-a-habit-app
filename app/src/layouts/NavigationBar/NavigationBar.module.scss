@@ -1,13 +1,27 @@
 .NavigationBar {
-  background-color: #1e1e1e;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  background-color: #f8f9fb;
 
-  div {
+  .navBar {
     max-width: 1200px;
     width: 100%;
-    background-color: red;
+    padding: 20px;
+
+    .ulContent {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      gap: 50px;
+      margin-left: 70px;
+    }
   }
+}
+
+.BarDark {
+  background-color: #1e1e1e;
+  color: #fff;
 }

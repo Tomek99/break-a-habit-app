@@ -1,7 +1,19 @@
 .Footer {
-  background-color: #1e1e1e;
+  background-color: #f8f9fb;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 10px;
+
+  .pContent {
+    font-size: 1.4rem;
+    font-family: Inter;
+    margin: 5px;
+  }
+}
+
+.BarDark {
+  background-color: #1e1e1e;
+  color: #fff;
 }
